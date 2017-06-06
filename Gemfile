@@ -17,6 +17,9 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'autoprefixer-rails'
 
+gem 'algoliasearch-rails', '~> 1.19.0'
+
+
 group :development, :test do
   gem 'binding_of_caller'
   gem 'better_errors'
