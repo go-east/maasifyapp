@@ -36,7 +36,8 @@ $(document).ready(function() {
             '<li>' +
             '  ' + hit._highlightResult.titre.value + ',' +
             '  ' + hit._highlightResult.categorie_une.value + ' - ' +
-            '  ' + hit.rating +
+            '  ' + hit.rating + ' - ' +
+            '  ' + '<a href="/hacks/'+hit.objectID+'">Show</a>'
             '</li>';
         }
       },

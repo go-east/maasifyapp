@@ -18,7 +18,8 @@ gem 'simple_form'
 gem 'autoprefixer-rails'
 
 gem 'algoliasearch-rails', '~> 1.19.0'
-
+gem 'cloudinary'
+gem 'carrierwave', '~> 0.11.2'
 
 group :development, :test do
   gem 'binding_of_caller'

@@ -1,14 +1,63 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Chapeau:</strong>
+  <%= @hack.chapeau %>
+</p>
+
+<p>
   <strong>Titre:</strong>
   <%= @hack.titre %>
 </p>
 
+
 <p>
   <strong>Description:</strong>
-  <%= @hack.description %>
+  <%=  @hack.description %>
 </p>
+
+<p>
+  <strong>Titre 2:</strong>
+  <%= @hack.titre_deux %>
+</p>
+
+<p>
+  <strong>Description 2 :</strong>
+    <%  @titres.each do |t| %>
+    <p ><%=  t %> </p>
+    <% end %>
+    <%  @descriptions.each do |d| %>
+    <p> <%=  d %> </p>
+    <% end %>
+    <%  @bullets.each do |b| %>
+    <ul> <%=  b %> </ul>
+    <% end %>
+
+</p>
+
+
+
+
+<p>
+  <strong>Titre 3:</strong>
+  <%= @hack.titre_trois %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @hack.description_trois %>
+</p>
+
+<p>
+  <strong>Titre 4:</strong>
+  <%= @hack.titre_quatre %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @hack.description_quatre %>
+</p>
+
 
 <p>
   <strong>Categorie une:</strong>
@@ -22,8 +71,11 @@
 
 <p>
   <strong>Image:</strong>
-  <%= @hack.image %>
+  <%= cl_image_tag("wixqufu0d8mnl9a2kjbd",
+      width: 400, height: 300, crop: :fill) %>
 </p>
 
 <%= link_to 'Edit', edit_hack_path(@hack) %> |
 <%= link_to 'Back', hacks_path %>
+
+
