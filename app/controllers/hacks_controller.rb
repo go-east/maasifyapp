@@ -10,14 +10,12 @@
 
     # GET /hacks/1
     # GET /hacks/1.json
-    def show
 
+    def titres(string)
       #transform description in array
-      array = @hack.description_deux.split
+      array = string.split
       start_element = ':element:'
       end_element = ':/element:'
-
-
         # removing elements
       tags_removed = []
       @isolated_element = isolating_element(array,start_element,end_element)
@@ -27,16 +25,31 @@
       end
 
       @titres = []
-      @descriptions = []
-      @bullets = []
       tags_removed.each do |tag|
         index_of_title = position(tag, ":desc:")
-
-      #   #isolating titles
         titre = tag[0...index_of_title]
         titre = to_string(titre)
         @titres << titre
+      end
+      @titres
+    end
 
+    def descriptions(string)
+      #transform description in array
+      array = string.split
+      start_element = ':element:'
+      end_element = ':/element:'
+        # removing elements
+      tags_removed = []
+      @isolated_element = isolating_element(array,start_element,end_element)
+      @isolated_element.each do |element|
+        tags_element_removed = remove_tags(element,":element:",":/element:")
+        tags_removed << tags_element_removed
+      end
+
+      @descriptions = [] 
+      tags_removed.each do |tag|
+        index_of_title = position(tag, ":desc:")
         #isolating description
         description = tag[(index_of_title + 1)...(tag.length - 1)]
         if description.include? ":bullet:"
@@ -50,6 +63,27 @@
           description = to_string(description)
           @descriptions << description
         end
+      end
+      @descriptions
+    end
+
+
+    def bullets(string)
+    # transform description in array
+      array = string.split
+      start_element = ':element:'
+      end_element = ':/element:'
+
+        # removing elements
+      tags_removed = []
+      @isolated_element = isolating_element(array,start_element,end_element)
+      @isolated_element.each do |element|
+        tags_element_removed = remove_tags(element,":element:",":/element:")
+        tags_removed << tags_element_removed
+      end
+
+        @bullets = []
+        tags_removed.each do |tag|
 
         #bullet
         if tag.include? ":bullet:"
@@ -64,8 +98,62 @@
         end
       end
       @bullets
+    end
+
+ 
+    def show
+      # transform description in array
+      # array = @hack.description_deux.split
+      # start_element = ':element:'
+      # end_element = ':/element:'
 
 
+      #   # removing elements
+      # tags_removed = []
+      # @isolated_element = isolating_element(array,start_element,end_element)
+      # @isolated_element.each do |element|
+      #   tags_element_removed = remove_tags(element,":element:",":/element:")
+      #   tags_removed << tags_element_removed
+      # end
+
+      # @titres = []
+      # @descriptions = []
+      # @bullets = []
+      # tags_removed.each do |tag|
+      #   index_of_title = position(tag, ":desc:")
+
+      # #   #isolating titles
+      #   titre = tag[0...index_of_title]
+      #   titre = to_string(titre)
+      #   @titres << titre
+
+      #   #isolating description
+      #   description = tag[(index_of_title + 1)...(tag.length - 1)]
+      #   if description.include? ":bullet:"
+      #     start_element = ':bullet:'
+      #     index_of_title = position(description, ":bullet:")
+      #     description = description[0...index_of_title] 
+      #     description = to_string(description)
+      #     @descriptions << description
+      #   else
+      #     description
+      #     description = to_string(description)
+      #     @descriptions << description
+      #   end
+
+      #   #bullet
+      #   if tag.include? ":bullet:"
+      #     start_element = ':bullet:'
+      #     end_element = ':/bullet:'
+      #     isolated_bullet = isolating_element(tag,start_element,end_element)
+      #     isolated_bullet.each do |bullet|
+      #       bullet_tag_removed = remove_tags(bullet,start_element,end_element)
+      #       bullet_tag_removed = to_string(bullet_tag_removed)
+      #       @bullets << bullet_tag_removed
+      #     end
+      #   end
+      # end
+      # @bullets
     end
     # GET /hacks/new
     def new
@@ -152,7 +240,9 @@
 
     helper_method :isolating_element
     helper_method :remove_tags
-    helper_method :extract
+    helper_method :titres
+    helper_method :descriptions
+    helper_method :bullets
 
 
     private
@@ -163,7 +253,7 @@
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def hack_params
-        params.require(:hack).permit(:titre, :description, :categorie_une, :qualite, :image, :chapeau, :titre_deux, :description_deux, :titre_trois, :description_trois, :titre_quatre, :description_quatre, :tag_un, :tag_deux, :tag_trois)
+        params.require(:hack).permit(:titre, :description, :categorie_une, :qualite, :image, :chapeau, :titre_deux, :description_deux, :titre_trois, :description_trois, :titre_quatre, :description_quatre, :tag_un, :tag_deux, :tag_trois,:photo, :photo_cache)
       end
   end
 

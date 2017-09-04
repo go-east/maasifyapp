@@ -1,4 +1,5 @@
 class Hack < ApplicationRecord
+    mount_uploader :photo, PhotoUploader
 
 	include AlgoliaSearch
 	algoliasearch do

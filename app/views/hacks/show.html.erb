@@ -10,32 +10,21 @@
   <%= @hack.titre %>
 </p>
 
-
-<p>
+</p>
   <strong>Description:</strong>
-  <%=  @hack.description %>
+<p> <%= @hack.description_deux %> </p>
+
 </p>
 
 <p>
   <strong>Titre 2:</strong>
-  <%= @hack.titre_deux %>
+  <p> caca </p>
+  <%= bullets(@hack.description_deux).each do |b|%>
+ <p> <%= b %> </p>
+  <% end %>
+
+  <p> bonjour </p>
 </p>
-
-<p>
-  <strong>Description 2 :</strong>
-    <%  @titres.each do |t| %>
-    <p ><%=  t %> </p>
-    <% end %>
-    <%  @descriptions.each do |d| %>
-    <p> <%=  d %> </p>
-    <% end %>
-    <%  @bullets.each do |b| %>
-    <ul> <%=  b %> </ul>
-    <% end %>
-
-</p>
-
-
 
 
 <p>
@@ -71,8 +60,8 @@
 
 <p>
   <strong>Image:</strong>
-  <%= cl_image_tag("wixqufu0d8mnl9a2kjbd",
-      width: 400, height: 300, crop: :fill) %>
+<%= image_tag @hack.photo.url(:bright_face) %>
+
 </p>
 
 <%= link_to 'Edit', edit_hack_path(@hack) %> |
